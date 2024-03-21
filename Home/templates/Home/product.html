@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+    <body style="background-color: darkslategray">
+	<div class="section trending">
+    <div class="container">
+<ul class="trending-filter">
+        <li>
+          <a class="is_active" href="http://localhost:8000/Productd" data-filter="*">Show All</a>
+        </li>
+        <li>
+          <a href="{% url 'ProductView_Adventure' %}" data-filter=".adv">Adventure</a>
+        </li>
+        <li>
+          <a href="{% url "ProductView_Strategy" %}" data-filter=".str">Strategy</a>
+        </li>
+        <li>
+          <a href="{% url 'ProductView_Racing' %}" data-filter=".rac">Racing</a>
+        </li>
+      </ul>
+      <div class="row trending-box" style="position: relative; height: 1060.54px;">
+
+          {% for d in data %}
+  <div class="col-lg-3 col-md-6 mb-30 trending-items">
+    <div class="item">
+      <div class="thumb">
+        <a href="{{ d.id }}"><img src="{{ d.image.url }}" style="height: 350px" alt=""></a>
+        {% if d.uncount %}
+        	<span class="price"><em>${{ d.last_price }}</em>${{ d.next_price }}</span>
+
+        {% endif %}
+      </div>
+      <div class="down-content">
+        <span class="category">{{ d.main_genre }}</span>
+        <h4>{{ d.name }}</h4>
+        <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="pagination">
+          {% if page_obj.has_previous %}
+            	<li><a href="?page={{ page_obj.previous_page_number }}"> &lt; </a></li>
+            {% endif %}
+
+          {% for f in paginator %}
+          	{% if page_obj.number == f.number %}
+              <li><a href="#" class="is_active">{{ f.number }} </a></li>
+              {% else %}
+              <li><a href="?page={{ f.number }}">{{ f.number }} </a></li>
+              {% endif %}
+          {% endfor %}
+
+
+            {% if page_obj.has_next %}
+            	<li><a href="?page={{ page_obj.next_page_number }}"> &gt; </a></li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div></body>
+{% endblock %}
+class="is_active"

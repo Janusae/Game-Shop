@@ -1,0 +1,33 @@
+<nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="https://logowik.com/" class="logo">
+                        <img src="{{ setting.logo.url }}" alt="" style="width: 158px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      
+                      <li><a href="{{ setting.Product_link }}">Product</a></li>
+                      {% if request.user.is_authenticated %}
+                      	<li><a href="{{ setting.User_Panel_link }}">User Panel</a></li>
+                          <li><a href="{{ setting.Logout_link }}">Logout</a></li>
+                          {% else %}
+                          <li><a href="{{ setting.Register_link }}">Register</a></li>
+                          <li><a href="{{ setting.Login_link }}">Login</a></li>
+                           
+                      {% endif %} 
+                    {% if request.user.is_superuser %}
+                          	<li><a href="{{ setting.Panel_Admin_link }}">Panel Admin</a></li>
+                          {% endif %}
+                      <li><a href="{{ setting.Contact_Us_link }}">Contact Us</a></li>
+                        <li><a href="{{ setting.About_Us_link }}">About Us</a></li>
+                      <li><a href="{{ setting.Home_link }}">Home</a></li>
+                      {% if request.user.is_authenticated %}
+                      	<li><a href="{% url 'home' %}" class="active">{{ request.user.username }}</a></li>
+                      {% endif %} 
+                  </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
